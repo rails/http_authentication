@@ -27,11 +27,7 @@ module HttpAuthentication
     end
 
     def user_name_and_password(request)
-      Base64.decode64(credentials(request)).split(/:/, 2)
-    end
-  
-    def credentials(request)
-      authorization(request).split.last
+      decode_credentials(request).split(/:/, 2)
     end
   
     def authorization(request)
@@ -39,7 +35,15 @@ module HttpAuthentication
       request.env['X-HTTP_AUTHORIZATION'] ||
       request.env['X_HTTP_AUTHORIZATION']
     end
-  
+    
+    def decode_credentials(request)
+      Base64.decode64(authorization(request).split.last)
+    end
+
+    def encode_credentials(user_name, password)
+      "Basic #{Base64.encode64("#{user_name}:#{password}")}"
+    end
+
     def authentication_request(controller, realm)
       controller.headers["WWW-Authenticate"] = %(Basic realm="#{realm.gsub(/"/, "")}")
       controller.render :text => "HTTP Basic: Access denied.\n", :status => :unauthorized

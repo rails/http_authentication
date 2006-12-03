@@ -16,7 +16,7 @@ class HttpAuthenticationTest < Test::Unit::TestCase
       def request
         Class.new do
           def env
-            { 'HTTP_AUTHORIZATION' => "Basic " + Base64.encode64("dhh:secret") }
+            { 'HTTP_AUTHORIZATION' => HttpAuthentication::Basic.encode_credentials("dhh", "secret") }
           end
         end.new
       end
