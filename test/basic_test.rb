@@ -2,7 +2,7 @@ require 'test/unit'
 $LOAD_PATH << File.dirname(__FILE__) + '/../lib/'
 require 'http_authentication'
 
-class HttpAuthenticationTest < Test::Unit::TestCase
+class HttpBasicAuthenticationTest < Test::Unit::TestCase
   include HttpAuthentication::Basic
   
   def setup

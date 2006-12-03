@@ -1,7 +1,7 @@
 Http Authentication
 ===================
 
-Makes it dead easy to do HTTP authentication using either the vanilla Basic or the more advanced Digest approach.
+Makes it dead easy to do HTTP Basic authentication.
 
 Simple Basic example:
 
@@ -69,9 +69,10 @@ In your integration tests, you can do something like this:
     assert_equal 200, status
   end
 
+
 Todo:
 
-* Implement Digest authentication scheme
+* Implement Digest authentication scheme (be a hero, implement it!)
 
 
 References:
